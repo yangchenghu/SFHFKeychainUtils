@@ -27,6 +27,10 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if ! __has_feature(objc_arc)
+#error This file must be compiled with ARC.
+#endif
+
 #import "SFHFKeychainUtils.h"
 #import <Security/Security.h>
 
@@ -239,7 +243,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	NSMutableDictionary *attributeQuery = [query mutableCopy];
 	[attributeQuery setObject: (id) kCFBooleanTrue forKey:(__bridge_transfer id) kSecReturnAttributes];
     CFTypeRef attrResult = NULL;
-	OSStatus status = SecItemCopyMatching((__bridge_retained CFDictionaryRef) attributeQuery, &attrResult);
+	OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef) attributeQuery, &attrResult);
 	//NSDictionary *attributeResult = (__bridge_transfer NSDictionary *)attrResult;
     
 	if (status != noErr) {
@@ -257,7 +261,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	NSMutableDictionary *passwordQuery = [query mutableCopy];
 	[passwordQuery setObject: (id) kCFBooleanTrue forKey: (__bridge_transfer id) kSecReturnData];
     CFTypeRef resData = NULL;
-	status = SecItemCopyMatching((__bridge_retained CFDictionaryRef) passwordQuery, (CFTypeRef *) &resData);
+	status = SecItemCopyMatching((__bridge CFDictionaryRef) passwordQuery, (CFTypeRef *) &resData);
 	NSData *resultData = (__bridge_transfer NSData *)resData;
 	
 	if (status != noErr) {
@@ -430,7 +434,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	
 	NSDictionary *query = [[NSDictionary alloc] initWithObjects: objects forKeys: keys];
 	
-	OSStatus status = SecItemDelete((__bridge_retained CFDictionaryRef) query);
+	OSStatus status = SecItemDelete((__bridge CFDictionaryRef) query);
 	
 	if (error != nil && status != noErr) 
     {
@@ -461,7 +465,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
     [searchData setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
     [searchData setObject:serviceName forKey:(__bridge id)kSecAttrService];
 
-    OSStatus status = SecItemDelete((__bridge_retained CFDictionaryRef)searchData);
+    OSStatus status = SecItemDelete((__bridge CFDictionaryRef)searchData);
 
 	if (error != nil && status != noErr) 
     {
