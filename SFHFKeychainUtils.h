@@ -79,20 +79,20 @@
  * @param
  * @return
  */
-+ (NSArray *)getAllServerNameserror:(NSError **)error;
++ (NSArray *) getAllServerNameserror:(NSError **)error;
 
 /**
  * @description 根据ServiceName获取UserName
  * @param
  * @return
  */
-+ (NSArray *)getAllUserNamesFromServiceName:(NSString *)serviceName error:(NSError **)error;
++ (NSArray *) getAllUserNamesFromServiceName:(NSString *)serviceName error:(NSError **)error;
 
 /**
  * @description 获取bundleSeedID
  * @param
  * @return
  */
-+ (NSString *)bundleSeedID;
++ (NSString *) bundleSeedID;
 
 @end

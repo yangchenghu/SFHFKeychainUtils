@@ -477,7 +477,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 // This can be checked in the developer center under App Identifiers; it's the _Prefix_ of your App ID,
 // _not_ any part of your Bundle ID.
 // Your Bundle ID is irrelevant to shared keychain access.
-+ (NSString *)bundleSeedID
++ (NSString *) bundleSeedID
 {
     NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
                            (__bridge id)(kSecClassGenericPassword), kSecClass,
