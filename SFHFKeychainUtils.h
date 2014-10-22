@@ -28,20 +28,70 @@
 //
 // Updated with ARC support.  Originally forked from:
 // https://github.com/beelsebob/F1Pad/commit/66ea68e08eef0a66c706c45583e071f0a032f3c8
-
+#import <Foundation/Foundation.h>
 
 @interface SFHFKeychainUtils : NSObject
 
-+ (NSString *)getPasswordForUsername:(NSString *)username andServiceName:(NSString *) serviceName error:(NSError **)error;
+/**
+ * @description 获取一个Item
+ * @param
+ * @return
+ */
++ (NSString *) getPasswordForUsername: (NSString *) username
+                       andServiceName: (NSString *) serviceName
+                          accessGroup: (NSString *) accessGroup
+                                error: (NSError **) error;
 
-+ (BOOL)storeUsername:(NSString *)username andPassword:(NSString *)password forServiceName: (NSString *)serviceName updateExisting:(BOOL)updateExisting error:(NSError **)error;
+/**
+ * @description 保存一个Item
+ * @param
+ * @return
+ */
++ (BOOL) storeUsername: (NSString *) username
+           andPassword: (NSString *) password
+        forServiceName: (NSString *) serviceName
+        updateExisting: (BOOL) updateExisting
+           accessGroup: (NSString *) accessGroup
+                 error: (NSError **) error;
 
-+ (BOOL)deleteItemForUsername:(NSString *)username andServiceName:(NSString *)serviceName error:(NSError **)error;
+/**
+ * @description 根据service和Username来清除Item
+ * @param
+ * @return
+ */
++ (BOOL) deleteItemForUsername: (NSString *) username
+                andServiceName: (NSString *) serviceName
+                   accessGroup: (NSString *) accessGroup
+                         error: (NSError **) error;
 
-+ (BOOL)purgeItemsForServiceName:(NSString *)serviceName error:(NSError **)error;
+/**
+ * @description 清除所有相同Servicename的Items
+ * @param
+ * @return
+ */
++ (BOOL) clearItemsForServiceName: (NSString *) serviceName
+                      accessGroup: (NSString *) accessGroup
+                            error: (NSError **) error;
 
+/**
+ * @description 获取所有的ServerName
+ * @param
+ * @return
+ */
 + (NSArray *)getAllServerNameserror:(NSError **)error;
 
+/**
+ * @description 根据ServiceName获取UserName
+ * @param
+ * @return
+ */
 + (NSArray *)getAllUserNamesFromServiceName:(NSString *)serviceName error:(NSError **)error;
+
+/**
+ * @description 获取bundleSeedID
+ * @param
+ * @return
+ */
++ (NSString *)bundleSeedID;
 
 @end
